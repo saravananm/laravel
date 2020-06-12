@@ -32,4 +32,14 @@ Route::group(['middleware' =>['customAuth']], function(){
 	Route::get('advertisements','AdvertisementController@view');
 	Route::post('advertisements','AdvertisementController@add');
 	Route::get('advertisements/{id}','AdvertisementController@edit');
+
+	// cover Image
+	Route::get('coverimages','CoverImageController@view');
+	Route::post('coverimages','CoverImageController@add');
+	Route::get('coverimages/{id}','CoverImageController@edit');
+
+	// Sub Category Image
+	Route::get('categories','CategoryController@view');
+	Route::post('categories','CategoryController@add');
+	Route::get('categories/{id}','CategoryController@edit');
 });

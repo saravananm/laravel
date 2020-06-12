@@ -4,12 +4,13 @@ namespace App\Services;
 use App\Advertisement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use File;
 
 class AdvertisementService
 {
-	public function getTag($id)
+	public function getAdvertisements($id)
 	{
-		return Tag::where('id',$id)->first();
+		return Advertisement::where('id',$id)->first();
 	}
 	public function advertisementsList()
 	{
@@ -19,9 +20,13 @@ class AdvertisementService
 	public function saveValidation($req)
 	{
 		return Validator::make($req->all(), [
-            'name' 			=> 'required|unique:tags|min:2',
-    		'color' 		=> 'required|size:6',
-    		'background' 	=> 'required|size:6',
+            'name' 			=> 'required|min:2',
+            'image_name' 	=> 'required|mimes:jpeg,png',
+    		'url' 			=> 'required|url',
+    		'width' 		=> 'required|integer|max:1200',
+    		'height' 		=> 'required|integer|max:1200',
+    		'order' 		=> 'required|integer|max:10',
+    		'position' 		=> 'required',
     		'status' 		=> 'required',
         ]);
 	}
@@ -29,30 +34,52 @@ class AdvertisementService
 	public function updateValidation($req)
 	{
 		return Validator::make($req->all(), [
-            'name' 			=> 'required|unique:tags,name,'.$req->id.'|min:2',
-    		'color' 		=> 'required|size:6',
-    		'background' 	=> 'required|size:6',
+            'name' 			=> 'required|min:2',
+            'image_name' 	=> 'mimes:jpeg,png',
+    		'url' 			=> 'required|url',
+    		'width' 		=> 'required|integer|max:1200',
+    		'height' 		=> 'required|integer|max:1200',
+    		'order' 		=> 'required|integer|max:10',
+    		'position' 		=> 'required',
     		'status' 		=> 'required',
         ]);
 	}
 
-	public function saveTags($req)
+	public function saveAdvertisements($req)
 	{
-		$tag 				= new Tag;
-        $tag->name 			= $req->name;
-        $tag->color 		= $req->color;
-        $tag->background 	= $req->background;
-        $tag->status 		= $req->status;;
-        $tag->save();
+		$adv 				= new Advertisement;
+		if($req->hasFile('image_name'))
+		{
+			$req->image_name->store('public/images/advertisements');
+			$file_path = $req->image_name->hashName();
+			$adv->image_name 	= $file_path;
+		}
+        $adv->name 			= $req->name;
+        $adv->url 			= $req->url;
+        $adv->width 		= $req->width;
+        $adv->height 		= $req->height;
+        $adv->order 		= $req->order;
+        $adv->position 		= $req->position;
+        $adv->status 		= $req->status;
+        $adv->save();
 	}
 
-	public function updateTags($req)
+	public function updateAdvertisements($req)
 	{
-		$tag 				= Tag::find($req->id);
-        $tag->name 			= $req->name;
-        $tag->color 		= $req->color;
-        $tag->background 	= $req->background;
-        $tag->status 		= $req->status;
-        $tag->save();
+		$adv 				= Advertisement::find($req->id);
+		if($req->hasFile('image_name'))
+		{
+			$req->image_name->store('public/images/advertisements');
+			$file_path = $req->image_name->hashName();
+			$adv->image_name 	= $file_path;
+		}
+        $adv->name 			= $req->name;
+        $adv->url 			= $req->url;
+        $adv->width 		= $req->width;
+        $adv->height 		= $req->height;
+        $adv->order 		= $req->order;
+        $adv->position 		= $req->position;
+        $adv->status 		= $req->status;
+        $adv->save();
 	}
 }

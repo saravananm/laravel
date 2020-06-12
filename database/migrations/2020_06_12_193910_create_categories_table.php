@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Advertisement extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class Advertisement extends Migration
      */
     public function up()
     {
-        Schema::create('advertisements', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image_name');
-            $table->string('url');
-            $table->integer('width');
-            $table->integer('height');
+            $table->string('category');
             $table->integer('order');
-            $table->enum('position', ['banner', 'sidepanel_top', 'sidepanel_bottom']);
             $table->enum('status', ['1', '0']);
             $table->timestamps();
         });
@@ -34,6 +29,6 @@ class Advertisement extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisements');
+        Schema::dropIfExists('categories');
     }
 }

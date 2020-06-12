@@ -21,6 +21,10 @@
       <ul class="side-menu">
         <li ><a  href="/tags">Tags Settings</a></li>
         <li ><a  href="/advertisements">Advertisements Settings</a></li>
+        <li ><a  href="/coverimages">Cover Image Settings</a></li>
+        <li ><a  href="/categories">Categories Settings</a></li>
+
+        
       </ul>
     </div>
 

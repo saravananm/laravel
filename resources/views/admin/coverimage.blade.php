@@ -1,13 +1,11 @@
 
 @extends('admin.layout.adminlayout')
 
-@section('title', 'Tags Settings')
+@section('title', 'Advertisement Settings')
 
 @section('content')
 <div class="contentarea">
   <div class="col-sm-12">
-    <a class="float-right" href="https://html-color-codes.info/" target="_blank">Get the Color Code</a>
-    <br />
     @if($errors->any())
     <div class="alert alert-danger" role="alert">
       <ul class="error-list">
@@ -20,22 +18,29 @@
     @if(session('message'))
      <div class="alert alert-success" role="alert"> {{session('message')}}</div>
     @endif
-    <form action="/tags" method="post">
+
+
+    <form action="/coverimages" method="post" enctype="multipart/form-data" >
       @csrf
       <div class="form-group">
         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
-        <label for="tagname">Tag Name:</label>
-        <input type="text" class="form-control"  name="name" placeholder="Enter Tag Name" value="@if(isset($edit_data)){{old('name', $edit_data->name)}}@else{{old('name')}}@endif" id="name">
+        <label for="month">Month:</label>
+        <input type="number" maxlength="2" class="form-control"  name="month" placeholder="Enter Month" value="@if(isset($edit_data)){{old('month', $edit_data->month)}}@else{{old('month')}}@endif" id="month">
       </div>
       <div class="form-group">
-        <label for="color">Text Color:</label>
-        <input type="text" maxlength="6" class="form-control" name="color" placeholder="Enter Text Color" value="@if(isset($edit_data)){{old('color', $edit_data->color)}}@else{{old('color')}}@endif" id="color">
-        <small>Don't include the #</small>
+        <label for="year">Year:</label>
+        <input type="number" maxlength="4" class="form-control" name="year" placeholder="Enter Year" value="@if(isset($edit_data)){{old('year',$edit_data->year)}}@else{{old('year')}}@endif" id="year">
       </div>
-      <div class="form-group">
-        <label for="background">Background color:</label>
-        <input type="text" maxlength="6" class="form-control" name="background" placeholder="Enter background Color" value="@if(isset($edit_data)){{old('background',$edit_data->background)}}@else{{old('background')}}@endif" id="background">
-        <small>Don't include the #</small>
+      <div class="row">
+        <div class="form-group col-sm-4 float-left">
+          <label for="image_name">Image</label>
+          <input type="file" class="form-control-file" id="image_name" name="image_name">
+        </div>
+        <div class="col-sm-8 float-right">
+          @if(isset($edit_data))
+          <img src= "{{url('storage/images/coverimage/'.$edit_data->image_name) }}" style="width:150px;height:70px" />
+          @endif
+        </div>
       </div>
       <div class="form-group">
         <label for="status">Status:</label>
@@ -77,30 +82,28 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Tag</th>
-          <th scope="col">Color</th>
-          <th scope="col">Background</th>
+          <th scope="col">Month-Year</th>
+          <th scope="col">Image</th>
           <th scope="col">Status</th>
-          <th scope="col">Priview</th>
           <th scope="col">Edit</th>
         </tr>
       </thead>
       <tbody>
-        @foreach($data as $tags)
+        @foreach($data as $coverimage)
           <tr>
-          <th scope="row">{{$tags->id}}</th>
-          <td>{{$tags->name}}</td>
-          <td>{{$tags->color}}</td>
-          <td>{{$tags->background}}</td>
+          <th scope="row">{{$coverimage->id}}</th>
+          <td>{{$coverimage->month}}- {{$coverimage->year}}</td>
           <td>
-            @if($tags->status == '1') 
+            @if($coverimage->status == '1') 
             Active
             @else
             In-active
             @endif
           </td>
-          <td><div class="btn btn-sm" style="background: #{{$tags->background}}; color: #{{$tags->color}}">{{$tags->name}}</div></td>
-          <td><a href="{{url('tags/' . $tags->id)}}">Edit</a></td>
+          <td>
+            <img src= "{{url('storage/images/coverimage/'.$coverimage->image_name) }}" style="width:150px;height:70px" />
+          </td>
+          <td><a href="{{url('coverimages/' . $coverimage->id)}}">Edit</a></td>
         </tr>
         @endforeach
         
