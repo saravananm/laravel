@@ -24,8 +24,8 @@
       @csrf
       <div class="form-group">
         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
-        <label for="tagname">Image Name:</label>
-        <input type="text" class="form-control"  name="name" placeholder="Enter Tag Name" value="@if(isset($edit_data)){{old('name', $edit_data->name)}}@else{{old('name')}}@endif" id="name">
+        <label for="tagname">Advertisement Name:</label>
+        <input type="text" class="form-control"  name="name" placeholder="Enter Advertisement Name" value="@if(isset($edit_data)){{old('name', $edit_data->name)}}@else{{old('name')}}@endif" id="name">
       </div>
       <div class="form-group">
         <label for="url">URL:</label>

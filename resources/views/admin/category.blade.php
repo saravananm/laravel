@@ -1,7 +1,7 @@
 
 @extends('admin.layout.adminlayout')
 
-@section('title', 'Tags Settings')
+@section('title', 'Categories Settings')
 
 @section('content')
 <div class="contentarea">

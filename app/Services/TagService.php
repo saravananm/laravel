@@ -16,6 +16,11 @@ class TagService
 		return Tag::paginate(3);
 	}
 
+	public function allTags()
+	{
+		return Tag::select('id','name','background','color')->where('status',1)->get();
+	}
+
 	public function saveValidation($req)
 	{
 		return Validator::make($req->all(), [

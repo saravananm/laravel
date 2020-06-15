@@ -1,7 +1,7 @@
 
 @extends('admin.layout.adminlayout')
 
-@section('title', 'Advertisement Settings')
+@section('title', 'Cover Image Settings')
 
 @section('content')
 <div class="contentarea">

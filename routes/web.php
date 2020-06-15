@@ -42,4 +42,9 @@ Route::group(['middleware' =>['customAuth']], function(){
 	Route::get('categories','CategoryController@view');
 	Route::post('categories','CategoryController@add');
 	Route::get('categories/{id}','CategoryController@edit');
+
+	// Posts
+	Route::get('posts','PostController@view');
+	Route::post('posts','PostController@add');
+	Route::get('posts/{id}','PostController@edit');
 });

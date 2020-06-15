@@ -11,6 +11,12 @@ class CategoryService
 	{
 		return Category::where('id',$id)->first();
 	}
+
+	public function allCategories()
+	{
+		return Category::select('id','category','order')->where('status',1)->orderBy('order', 'desc')->get();
+	}
+
 	public function categoriesList()
 	{
 		return Category::paginate(3);
