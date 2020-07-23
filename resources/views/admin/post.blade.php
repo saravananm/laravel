@@ -23,6 +23,7 @@
     <form action="/posts" method="post" enctype="multipart/form-data" >
       @csrf
       <div class="form-group">
+         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
             <label for="division">Select Division</label>
             <select class="form-control" id="division" name="division">
                 @foreach($divisions as $slug => $division)
@@ -31,7 +32,7 @@
                   @if(old('division') !== null)
                   {{ (old("division") == $slug ? "selected":"") }}
                   @else
-                  {{ ($edit_data->division == 1 ? "selected":"") }}
+                  {{ ($edit_data->division == $slug ? "selected":"") }}
                   @endif
                 @else
                   @if(old('division') !== null)
@@ -49,6 +50,22 @@
                 @foreach($categorieslist as $category)
                 <option value="{{$category->id}}"
                
+                @if(isset($edit_data))
+                  @if(old('categories') !== null)
+                  {{ (in_array($category->id, old("categories")) ? "selected":"") }}
+                  @else
+                    @foreach($edit_data->categories as $ecategories_id)
+                      @if($category->id == $ecategories_id->id)
+                     selected
+                      @endif
+                    @endforeach
+                  @endif
+                @else
+                    @if(old('categories') !== null)
+                    {{ (in_array($category->id, old("categories")) ? "selected":"") }}
+                    @endif
+                @endif
+
                 >{{$category->category}}</option>
                 @endforeach
             </select>
@@ -94,19 +111,57 @@
                 @if(old('tag') !== null)
                 {{ (in_array($tag->id, old("tag")) ? "checked":"") }}
                 @else
-                {{ (in_array(1, $edit_data->tags) ? "checked":"") }}
+                  @foreach($edit_data->tags as $etag_id)
+                    @if($tag->id == $etag_id->id)
+                   checked
+                    @endif
+                  @endforeach
                 @endif
-              @else
+            @else
                 @if(old('tag') !== null)
                 {{ (in_array($tag->id, old("tag")) ? "checked":"") }}
                 @endif
-              @endif
+            @endif
              value="{{$tag->id}}">
             <label class="form-check-label" for="tag{{$tag->id}}">{{$tag->name}}</label>
         </div>
         @endforeach
         <br  class="clear-fix"/>
-
+        <br  class="clear-fix"/>
+      <div class="form-group">
+        Cover Image:
+      <br />
+          <input type="radio" id="cover_image_yes" name="cover_image" 
+            @if(isset($edit_data))
+              @if(@old('cover_image') !== null)
+              {{ (old("cover_image") == 1 ? "checked":"") }}
+              @else
+              {{ ($edit_data->cover_image == 1 ? "checked":"") }}
+              @endif
+            @else
+              @if(@old('cover_image') !== null)
+              {{ (old("cover_image") == 1 ? "checked":"") }}
+              @endif
+            @endif
+           value="1">
+          <label for="cover_image_yes">Yes</label>
+          <input type="radio" id="cover_image_no" name="cover_image"
+          @if(isset($edit_data))
+            @if(@old('cover_image') !== null)
+            {{ (old("cover_image") == 0 ? "checked":"") }}
+            @else
+            {{ ($edit_data->cover_image == 0 ? "checked":"") }}
+            @endif
+          @else
+            @if(@old('cover_image') !== null)
+            {{ (old("cover_image") == 0 ? "checked":"") }}
+            @else
+            checked
+            @endif
+          @endif
+           value="0">
+          <label for="cover_image_no">No</label><br>
+      </div>
       <div class="form-group">
         <label for="status">Status:</label>
           <select class="form-control" id="status" name="status">

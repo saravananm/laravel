@@ -63,9 +63,6 @@ class PostController extends Controller
         $categorieslist = $this->categoryservice->allCategories();
         $tags           = $this->tagservice->allTags();
         $edit_data      = $this->postservice->getposts($id);
-       // echo '<pre>'; print_r($tags); die;
-       //echo '<pre>'; print_r($edit_data->tags); die;
-        //echo '<pre>'; print_r($edit_data); die;
     	return View('admin.post',['data'=> $post, 'divisions'=> $divisions, 'categorieslist' => $categorieslist, 'tags' => $tags, 'edit_data' => $edit_data]);
     }
 }

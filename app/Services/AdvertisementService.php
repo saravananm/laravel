@@ -12,9 +12,10 @@ class AdvertisementService
 	{
 		return Advertisement::where('id',$id)->first();
 	}
+
 	public function advertisementsList()
 	{
-		return Advertisement::paginate(3);
+		return Advertisement::paginate(5);
 	}
 
 	public function saveValidation($req)
@@ -81,5 +82,10 @@ class AdvertisementService
         $adv->position 		= $req->position;
         $adv->status 		= $req->status;
         $adv->save();
+	}
+
+	public function getAdvertisementsByPosition($position)
+	{
+		return Advertisement::where('position',$position)->orderBy('order','asc')->get();
 	}
 }

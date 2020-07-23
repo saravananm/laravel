@@ -17,11 +17,13 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('division');
             $table->string('title');
+            $table->string('slug');
             $table->mediumText('short_message');
             $table->longText('message');
             $table->string('image_name');
             $table->date('datefor');
             $table->string('author');
+            $table->enum('cover_image', ['1', '0']);
             $table->enum('status', ['1', '0']);
             $table->timestamps();
         });

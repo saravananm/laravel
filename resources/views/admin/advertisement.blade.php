@@ -139,6 +139,7 @@
           <th scope="col">Name</th>
           <th scope="col">Size</th>
           <th scope="col">URL</th>
+          <th scope="col">Position</th>
           <th scope="col">Order</th>
           <th scope="col">Status</th>
           <th scope="col">Priview</th>
@@ -152,6 +153,15 @@
           <td>{{$advertisements->name}}</td>
           <td>{{$advertisements->width}}x{{$advertisements->height}}</td>
           <td>{{$advertisements->url}}</td>
+          <td>
+              @if($advertisements->position == 'sidepanel_top')
+              Side Panel Top
+              @elseif($advertisements->position == 'sidepanel_bottom')
+              Side Panel Bottom
+              @else
+              Banner
+              @endif
+          </td>
           <td>{{$advertisements->order}}</td>
           <td>
             @if($advertisements->status == '1') 

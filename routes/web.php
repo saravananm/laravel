@@ -12,10 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Front End 
+Route::get('/','FrontEndController@homepage');
+Route::get('post/{slug}','FrontEndController@postpage');
+Route::get('news-and-features','FrontEndController@newsandfeaturespage');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Admin Side
 Route::view('login','admin.login');
 Route::post('login', 'LoginController@login');
 Route::get('logout', 'LoginController@logout');

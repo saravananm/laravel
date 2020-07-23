@@ -13,7 +13,7 @@ class CoverImageService
 	}
 	public function coverImagesList()
 	{
-		return Coverimage::paginate(3);
+		return Coverimage::paginate(10);
 	}
 
 	public function saveValidation($req)
@@ -64,5 +64,10 @@ class CoverImageService
         $cover->year 		= $req->year;
         $cover->status 		= $req->status;
         $cover->save();
+	}
+
+	public function getLatestCoverImage()
+	{
+		return Coverimage::orderBy('year','desc')->where('status','1')->orderBy('month','desc')->first();
 	}
 }
