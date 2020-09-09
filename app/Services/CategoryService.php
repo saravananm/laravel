@@ -14,7 +14,7 @@ class CategoryService
 
 	public function allCategories()
 	{
-		return Category::select('id','category','order')->where('status',1)->orderBy('order', 'desc')->get();
+		return Category::select('id','category','order')->where('status',1)->orderBy('order', 'asc')->get();
 	}
 
 	public function categoriesList()

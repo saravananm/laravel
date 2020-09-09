@@ -24,10 +24,10 @@
                         <div class="header-nav">
                             <a href={{url('/')}}  class="{{ (request()->is('/')) ? 'active' : '' }}"> Home</a>
                             <a class="{{ (request()->is('news-and-features')) ? 'active' : '' }}" href="{{url('news-and-features')}}">News&Features</a>
-                            <a href="discoveries.php">Discoveries&Innovations</a>
-                            <a href="discoveries.php">Applications&Impacts</a>
-                            <a href="discoveries.php">Science&Society</a>
-                            <a href="the-scitech-journal.php">TheScitechJournal</a>
+                            <a class="{{ (request()->is('discoveries-and-innovations')) ? 'active' : '' }}" href="{{url('discoveries-and-innovations')}}">Discoveries&Innovations</a>
+                            <a class="{{ (request()->is('applications-and-impacts')) ? 'active' : '' }}" href="{{url('applications-and-impacts')}}">Applications&Impacts</a>
+                            <a class="{{ (request()->is('science-and-society')) ? 'active' : '' }}" href="{{url('science-and-society')}}">Science&Society</a>
+                            <a class="{{ (request()->is('the-scitech-journal')) ? 'active' : '' }}" href="{{url('the-scitech-journal')}}">TheScitechJournal</a>
                         </div>
                     </div>
                 </div> 

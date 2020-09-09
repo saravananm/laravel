@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','FrontEndController@homepage');
 Route::get('post/{slug}','FrontEndController@postpage');
 Route::get('news-and-features','FrontEndController@newsandfeaturespage');
+Route::get('discoveries-and-innovations','FrontEndController@discoveriesandinnovationspage');
+Route::get('applications-and-impacts','FrontEndController@applicationsandimpactspage');
+Route::get('science-and-society','FrontEndController@scienceandsocietypage');
+Route::get('the-scitech-journal/{my?}','FrontEndController@thescitechjournalpage');
 
 // Admin Side
 Route::view('login','admin.login');
@@ -49,4 +53,13 @@ Route::group(['middleware' =>['customAuth']], function(){
 	Route::get('posts','PostController@view');
 	Route::post('posts','PostController@add');
 	Route::get('posts/{id}','PostController@edit');
+
+	// The ScitechjournalPosts
+	Route::get('thescitechjournalposts','ThescitechjournalpostController@view');
+	Route::post('thescitechjournalposts','ThescitechjournalpostController@add');
+	Route::get('thescitechjournalposts/{id}','ThescitechjournalpostController@edit');
+
+	//Forthcoming issue Highlights
+	Route::get('highlights','HighlightController@view');
+	Route::post('highlights','HighlightController@add');
 });

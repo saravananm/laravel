@@ -20,6 +20,8 @@
         <li ><a  href="/coverimages">Cover Image Module</a></li>
         <li ><a  href="/categories">Categories Module</a></li>
         <li ><a  href="/posts">Post Module</a></li>
+        <li ><a  href="/thescitechjournalposts">The ScitechJournal Post Module</a></li>
+        <li ><a  href="/highlights">Highlight Module</a></li>
       </ul>
     </div>
     <div class="col-sm-10 float-left ml-0 mr-0 pr-0 pl-0">

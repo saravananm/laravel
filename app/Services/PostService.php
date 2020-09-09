@@ -167,8 +167,17 @@ class PostService
 		return Post::with(['tags'])->where('division','news-features')->orderBy('datefor','desc')->take(5)->get();
 	}
 
+	public function getPostsByFilters($division, $categories)
+	{
+		if(empty($categories))
+			return Post::with(['tags'])->where('division',$division)->orderBy('datefor','desc')->paginate(2);
+		else
+			return Post::join('post_categories', 'posts.id', '=', 'post_categories.post_id')->with(['tags'])->where('division',$division)->whereIn('categorie_id',$categories)->orderBy('datefor','desc')->paginate(2);
+
+	}
+
 	public function getNewsAndFeaturePosts()
 	{
-		return Post::with(['tags'])->where('division','news-features')->orderBy('datefor','desc')->orderBy('id','desc')->paginate(2);
+		return Post::with(['tags'])->where('division','news-features')->orderBy('id','desc')->paginate(3);
 	}
 }

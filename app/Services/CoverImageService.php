@@ -70,4 +70,20 @@ class CoverImageService
 	{
 		return Coverimage::orderBy('year','desc')->where('status','1')->orderBy('month','desc')->first();
 	}
+
+	public function getSecondSndThiredCoverImage()
+	{
+		return Coverimage::orderBy('year','desc')->where('status','1')->orderBy('month','desc')->skip(1)->limit(2)->get();
+	}
+
+	public function getCoverImageByFilter($my)
+	{
+		$my_array = explode("-",$my);
+		return Coverimage::where('year',$my_array[1])->where('status','1')->where('month',$my_array[0])->first();
+	}
+
+	public function allCoverImages()
+	{
+		return Coverimage::orderBy('year','desc')->where('status','1')->orderBy('month','desc')->get();
+	}
 }
