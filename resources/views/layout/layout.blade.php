@@ -5,9 +5,9 @@
         <meta charset="utf-8">
 		<link rel="icon" href="images/sticon.png" type="image/png">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('/css/bootstrap/4.5.0/css/bootstrap.min.css') }}">
-        <script type="text/javascript" src="{{ asset('/js/jquery-3.5.1.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('/public/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('/public/css/bootstrap/4.5.0/css/bootstrap.min.css') }}">
+        <script type="text/javascript" src="{{ asset('/public/js/jquery-3.5.1.min.js') }}"></script>
         @stack('head')
     </head>
     <body>  
@@ -52,7 +52,7 @@
                 <h4>Footer Message</h4>
             </footer>
         </div>
-        <script src="{{ asset('/css/bootstrap/4.5.0/js/bootstrap.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/custom.js') }}"></script>
+        <script src="{{ asset('/public/css/bootstrap/4.5.0/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/public/js/custom.js') }}"></script>
     </body>
 </html>

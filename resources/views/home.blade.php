@@ -16,7 +16,7 @@
             </div>
              <div class="col-md-4  pl-0 pr-0 pb-1" >
                 <div class="graybox img-hover">
-                    <img src="{{url('storage/images/coverimage/'.$coverimage->image_name) }}"  class="image-fit">                         
+                    <img src="{{url('public/storage/images/coverimage/'.$coverimage->image_name) }}"  class="image-fit">                         
                 </div>                               
             </div>
         </div>  
@@ -25,7 +25,7 @@
             @foreach($data as $post)
             <div class="list-news">
                 <div class="col-md-4 float-left pr-0 img-hover">
-                    <img src="{{url('storage/images/posts/'.$post->image_name) }}" class="image-fit" >  
+                    <img src="{{url('public/storage/images/posts/'.$post->image_name) }}" class="image-fit" >  
                     @foreach($post->tags as $tag)
                     <span class="news-tag" style="background:#{{$tag->background}};color:#{{$tag->color}};margin-left:5px; position:relative;top:-30px;">{{$tag->name}}</span>
                     @endforeach
