@@ -20,7 +20,7 @@
     @endif
 
 
-    <form action="/thescitechjournalposts" method="post" enctype="multipart/form-data" >
+    <form action="{{url('/thescitechjournalposts')}}" method="post" enctype="multipart/form-data" >
       @csrf
       <div class="form-group">
          <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">

@@ -8,6 +8,7 @@ use App\Services\CoverImageService;
 use App\Services\CategoryService;
 use App\Services\HighlightService;
 use App\Services\AdvertisementService;
+use App\Services\ThescitechjournalpostService;
 use Input;
 
 class FrontEndController extends Controller
@@ -17,6 +18,7 @@ class FrontEndController extends Controller
     protected $categoryservice;
     protected $highlightservice;
     protected $advertisementservice;
+    protected $thescitechjournalpostservice;
 
 	public function __construct(Postservice $postservice, AdvertisementService $advertisementservice)
 	{
@@ -121,16 +123,27 @@ class FrontEndController extends Controller
     public function thescitechjournalpage($my = '')
     {
         $advertisementdetails_banner    = $this->advertisementservice->getAdvertisementsByPosition('banner');
-        $this->coverimageservice = new CoverImageService();
-        $this->highlightservice = new HighlightService();
-        $post                       = $this->postservice->getTopNewsAndFeaturePosts();
+        $this->coverimageservice        = new CoverImageService();
+        $this->highlightservice         = new HighlightService();
+        $this->thescitechjournalpostservice    = new ThescitechjournalpostService();
+        $post                           = $this->postservice->getTopNewsAndFeaturePosts();
+
         if($my == '')
-            $coverimage             = $this->coverimageservice->getLatestCoverImage();
+        {
+            $coverimage                 = $this->coverimageservice->getLatestCoverImage();
+            $cover_image_month_year     = $coverimage ->month.'-'.$coverimage->year;
+            $thescitechjournalpost      = $this->thescitechjournalpostservice->getThescitechPosts($cover_image_month_year);
+        }
         else
-            $coverimage             = $this->coverimageservice->getCoverImageByFilter($my);
-        $highlight                  = $this->highlightservice->getHighlight();
-        $coverimagesecongandthired  = $this->coverimageservice->getSecondSndThiredCoverImage();
-        return View('thescitechjournal',['data'=> $post, 'coverimage'=>$coverimage, 'highlight'=>$highlight, 'coverimagesecongandthired'=>$coverimagesecongandthired, 'advertisementdetails_banner' => $advertisementdetails_banner]);
+        {
+            $coverimage                 = $this->coverimageservice->getCoverImageByFilter($my);
+            $thescitechjournalpost      = $this->thescitechjournalpostservice->getThescitechPosts($my);
+        }
+
+        $highlight                      = $this->highlightservice->getHighlight();
+
+        $coverimagesecongandthired      = $this->coverimageservice->getSecondSndThiredCoverImage();
+        return View('thescitechjournal',['data'=> $post, 'coverimage'=>$coverimage, 'highlight'=>$highlight, 'coverimagesecongandthired'=>$coverimagesecongandthired, 'advertisementdetails_banner' => $advertisementdetails_banner, 'thescitechjournalpost' => $thescitechjournalpost]);
     }
 
     public function postpage($slug)
@@ -142,5 +155,16 @@ class FrontEndController extends Controller
         
     	$post           = $this->postservice->getPostBySlug($slug);
     	return View('post',['post'=> $post, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner]);
+    }
+
+    public function thescitechjournalpostpage($slug)
+    {
+        $advertisementdetails_top       = $this->advertisementservice->getAdvertisementsByPosition('sidepanel_top');
+        $sidepaneltabdetails            = $this->postservice->getSidePanelTab();
+        $advertisementdetails_bottom    = $this->advertisementservice->getAdvertisementsByPosition('sidepanel_bottom');
+        $advertisementdetails_banner    = $this->advertisementservice->getAdvertisementsByPosition('banner');
+        $this->thescitechjournalpostservice    = new ThescitechjournalpostService();
+        $post           = $this->thescitechjournalpostservice->getPostBySlug($slug);
+        return View('thescitechjournalpost',['post'=> $post, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner]);
     }
 }

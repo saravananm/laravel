@@ -20,6 +20,7 @@ Route::get('discoveries-and-innovations','FrontEndController@discoveriesandinnov
 Route::get('applications-and-impacts','FrontEndController@applicationsandimpactspage');
 Route::get('science-and-society','FrontEndController@scienceandsocietypage');
 Route::get('the-scitech-journal/{my?}','FrontEndController@thescitechjournalpage');
+Route::get('the-scitech-journal-post/{slug}','FrontEndController@thescitechjournalpostpage');
 
 // Admin Side
 Route::view('login','admin.login');

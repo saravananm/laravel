@@ -15,13 +15,13 @@
       <h2 class="avatar">Hi {{Session('user_name')}}</h2>
       <h3 class="menu-title">Main Menu</h3>
       <ul class="side-menu">
-        <li ><a  href="/tags">Tags Module</a></li>
-        <li ><a  href="/advertisements">Advertisements Module</a></li>
-        <li ><a  href="/coverimages">Cover Image Module</a></li>
-        <li ><a  href="/categories">Categories Module</a></li>
-        <li ><a  href="/posts">Post Module</a></li>
-        <li ><a  href="/thescitechjournalposts">The ScitechJournal Post Module</a></li>
-        <li ><a  href="/highlights">Highlight Module</a></li>
+        <li ><a  href="{{url('tags')}}">Tags Module</a></li>
+        <li ><a  href="{{url('advertisements')}}">Advertisements Module</a></li>
+        <li ><a  href="{{url('coverimages')}}">Cover Image Module</a></li>
+        <li ><a  href="{{url('categories')}}">Categories Module</a></li>
+        <li ><a  href="{{url('posts')}}">Post Module</a></li>
+        <li ><a  href="{{url('thescitechjournalposts')}}">The ScitechJournal Post Module</a></li>
+        <li ><a  href="{{url('highlights')}}">Highlight Module</a></li>
       </ul>
     </div>
     <div class="col-sm-10 float-left ml-0 mr-0 pr-0 pl-0">

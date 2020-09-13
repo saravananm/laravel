@@ -11,7 +11,7 @@ class ThescitechjournalpostService
 {
     protected $categoryservice;
 
-    public function __construct(CategoryService $categoryservice)
+    public function __construct()
     {
        // $this->categoryservice = $categoryservice;
 	}
@@ -23,7 +23,7 @@ class ThescitechjournalpostService
 
 	public function getPostBySlug($slug)
 	{
-		return Post::where('slug',$slug)->first();
+		return Thescitechjournalpost::join('tags','thescitechjournalposts.tag_id','=','tags.id')->where('slug',$slug)->first();
 	}
 
 	public function postsList()
@@ -109,5 +109,11 @@ class ThescitechjournalpostService
 	public function slugify($title)
 	{
 		return strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $title));
+	}
+
+	public function getThescitechPosts($my)
+	{
+		$my_array = explode("-",$my);
+		return Thescitechjournalpost::join('coverimages', 'thescitechjournalposts.coverimages_id', '=', 'coverimages.id')->join('tags','thescitechjournalposts.tag_id','=','tags.id')->where('thescitechjournalposts.status','1')->where('coverimages.month',$my_array[0])->where('coverimages.year',$my_array[1])->orderBy('thescitechjournalposts.id','desc')->select('thescitechjournalposts.id','thescitechjournalposts.title','thescitechjournalposts.slug','tags.*')->get();
 	}
 }

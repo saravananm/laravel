@@ -14,24 +14,13 @@
                     <img src="{{url('public/storage/images/coverimage/'.$coverimage->image_name) }}"  class="image-fit"> 
                 </div>
             </div>
-             <div class="col-md-4  pl-0 pr-0 pb-1" >
-                <div class="content-tag" style="color:#8bc34a;">Feature</div>
-                 <h2 class="content-heading">You have five appetites, not one, and they are the key to your health</h2>
+            <div class="col-md-4  pl-0 pr-0 pb-1" >
+                @foreach($thescitechjournalpost as $thpost)
+                <div class="content-tag" style="color:#{{$thpost->background}};">{{$thpost->name}}</div>
+                <h2 class="content-heading"><a href="{{url('the-scitech-journal-post/'.$thpost->slug)}}">{{$thpost->title}}</a></h2>
+                @endforeach
                  
-                 <div class="content-tag" style="color:#ff0000;">News</div>
-                 <h2 class="content-heading">Coronavirus and covid-19: Your questions answered</h2>
                  
-                 <div class="content-tag" style="color:#ff0000;">News</div>
-                 <h2 class="content-heading">ESA spacecraft might accidentally fly through the tail of a comet</h2>
-                 
-                 <div class="content-tag" style="color:#ff0000;">News</div>
-                 <h2 class="content-heading">'Zombie' fires are burning the Arctic after smouldering under snow</h2>
-                 
-                 <div class="content-tag" style="color:#ff0000;">News</div>
-                 <h2 class="content-heading">Mouse embryos that are 4 per cent human are step towards spare organs</h2>
-                 
-                 <div class="content-tag" style="color:#ff0000">News</div>
-                 <h2 class="content-heading">Shock therapy temporarily improves woman’s colour blindness</h2>
                             
             </div>
         </div>  

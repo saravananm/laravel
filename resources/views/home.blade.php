@@ -34,7 +34,7 @@
                     @endforeach
                 </div>
                 <div class="col-md-8 float-right pr-0">
-                    <h4><a href="/post/{{$post->slug}}">{{$post->title}}</a></h4>
+                    <h4><a href="{{url('post/'.$post->slug)}}">{{$post->title}}</a></h4>
                     <div class="list-date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{date('F j, Y', strtotime($post->datefor))}}</div>
                     <div class="list-author"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$post->author}}</div>
                     <div class="clearfix"></div>
