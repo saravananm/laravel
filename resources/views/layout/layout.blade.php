@@ -13,11 +13,20 @@
     <body>  
         <div class="container">
             <header>
-                <x-banneradvertisement />
+                <div class="header-banner">
+                    @foreach($advertisementdetails_banner as $advertisements_banner)
+                        <a href="{{$advertisements_banner->url}}" target="blank">
+                            <div style="position: relative; width:{{$advertisements_banner->width}}px;height:{{$advertisements_banner->height}}px; margin: 0 auto;">
+                                <img src= "{{url('public/storage/images/advertisements/'.$advertisements_banner->image_name) }}" style="width:{{$advertisements_banner->width}}px;height:{{$advertisements_banner->height}}px" />
+                                <h3 style="position: absolute; margin-top:-30px; text-align: center; display: inline-block; width: 100%">{{$advertisements_banner->name}}</h3>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
                 <div class="row">
                     <div class="col-md-12 col-lg-3 pr-0">
                         <a href="#">
-                            <img src="{{ asset('/image/logo.jpg') }}"   class="header-logo" alt="Logo" />
+                            <img src="{{ asset('/public/image/logo.jpg') }}"   class="header-logo" alt="Logo" />
                         </a>
                     </div>
                     <div class="col-md-12 col-lg-9" >

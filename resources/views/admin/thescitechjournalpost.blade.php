@@ -168,7 +168,7 @@
 </div>
 @push('head')
 <!-- Scripts -->
-<script src="{{ asset('js/ckeditor/ckeditor.js')}}"></script>
+<script src="{{ asset('public/js/ckeditor/ckeditor.js')}}"></script>
 @endpush
 <script>
       CKEDITOR.replace( 'short_message' );

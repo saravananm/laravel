@@ -4,9 +4,9 @@
   <title> @yield('title') - page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ asset('/css/bootstrap/4.5.0/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/public/css/bootstrap/4.5.0/css/bootstrap.min.css') }}">
   <!-- Custom CSS -->  
-  <link href="{{ asset('/css/admin.css') }}" rel="stylesheet">
+  <link href="{{ asset('/public/css/admin.css') }}" rel="stylesheet">
   @stack('head')
 </head>
 <body>
@@ -32,6 +32,6 @@
       @yield('content')
     </div>
 </div>
-<script src="{{ asset('/css/bootstrap/4.5.0/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/public/css/bootstrap/4.5.0/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

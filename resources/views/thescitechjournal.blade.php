@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-8 pb-1">
                 <div style="position:relative;border: 2px solid #eaeaea"> 
-                    <img src="{{url('storage/images/coverimage/'.$coverimage->image_name) }}"  class="image-fit"> 
+                    <img src="{{url('public/storage/images/coverimage/'.$coverimage->image_name) }}"  class="image-fit"> 
                 </div>
             </div>
              <div class="col-md-4  pl-0 pr-0 pb-1" >
