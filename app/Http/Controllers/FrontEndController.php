@@ -167,4 +167,25 @@ class FrontEndController extends Controller
         $post           = $this->thescitechjournalpostservice->getPostBySlug($slug);
         return View('thescitechjournalpost',['post'=> $post, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner]);
     }
+
+    public function thescitechjournallistpage($my = '')
+    {
+        $this->coverimageservice        = new CoverImageService();
+        $advertisementdetails_banner    = $this->advertisementservice->getAdvertisementsByPosition('banner');
+        $coverImageYearMonths                 = $this->coverimageservice->getCoverImageYearsMonths();
+        $Latestcoverimage                 = $this->coverimageservice->getLatestCoverImage();
+        if($my == '')
+        {
+            $month  = $Latestcoverimage->month;
+            $year   = $Latestcoverimage->year;
+        }
+        else
+        {
+            $my_array = explode("-",$my);
+            $month  = $my_array[1];
+            $year   = $my_array[0];
+        }
+        $monthname = array ('01'=>'Jan','02'=>'Feb','03'=>'Mar','04'=>'Apr','05'=>'May','06'=>'Jun','07'=>'Jul','08'=>'Aug','09'=>'Sep','10'=>'Oct','11'=>'Nov','12'=>'Dec');
+        return View('thescitechjournallist',['advertisementdetails_banner' => $advertisementdetails_banner,'coverImageYearMonths' => $coverImageYearMonths, 'selmonth' => $month, 'selyear' => $year, 'monthname' => $monthname]);
+    }
 }

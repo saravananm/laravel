@@ -86,4 +86,15 @@ class CoverImageService
 	{
 		return Coverimage::orderBy('year','desc')->where('status','1')->orderBy('month','desc')->get();
 	}
+
+	public function getCoverImageYearsMonths()
+	{
+		$YearsMonths =  Coverimage::where('status','1')->orderBy('year','desc')->orderBy('month','desc')->get();
+		$arr = [];
+		foreach($YearsMonths as $ym)
+		{
+			$arr[$ym->year][$ym->month] = 1;
+		}
+		return $arr;
+	}
 }

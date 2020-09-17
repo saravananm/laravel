@@ -21,6 +21,7 @@ Route::get('applications-and-impacts','FrontEndController@applicationsandimpacts
 Route::get('science-and-society','FrontEndController@scienceandsocietypage');
 Route::get('the-scitech-journal/{my?}','FrontEndController@thescitechjournalpage');
 Route::get('the-scitech-journal-post/{slug}','FrontEndController@thescitechjournalpostpage');
+Route::get('the-scitech-journal-list/{my?}','FrontEndController@thescitechjournallistpage');
 
 // Admin Side
 Route::view('login','admin.login');

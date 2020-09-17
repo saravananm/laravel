@@ -17,7 +17,7 @@
             <div class="col-md-4  pl-0 pr-0 pb-1" >
                 @foreach($thescitechjournalpost as $thpost)
                 <div class="content-tag" style="color:#{{$thpost->background}};">{{$thpost->name}}</div>
-                <h2 class="content-heading"><a href="{{url('the-scitech-journal-post/'.$thpost->slug)}}">{{$thpost->title}}</a></h2>
+                <h2 class="content-heading"><a style="color: #000;" href="{{url('the-scitech-journal-post/'.$thpost->slug)}}">{{$thpost->title}}</a></h2>
                 @endforeach
                  
                  
@@ -51,8 +51,8 @@
         <div class="title-box-full pl-1 "><span>Forthcoming issue Highlights</span></div>
         <h2 class="content-heading mt-1">We have seen hints of a new fundamental force of nature</h2>
         {!! $highlight->highlights !!}
-        
-        <div class="title-box-full pl-1 "><span>PAST ISSUES</span></div>
+        <div class="title-box-full pl-1 mb-3"><a style="color: #dc3545; font-weight: bold; text-align: center;" href="{{url('the-scitech-journal-list')}}">Click here to view all issues</a></div>
+        <div class="title-box-full pl-1 mb-3"><span>PAST TWO ISSUES</span></div>
         
         @foreach($coverimagesecongandthired as $cimage)
         <div class="graybox img-hover mt-1">
@@ -60,6 +60,7 @@
         </div> 
         
         @endforeach
+
     </div>
     <div class="clearfix"></div>
 </div>

@@ -204,12 +204,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
    text-align:center;
    line-height:15px;
 }
+.tab-year, .tab-month{
+   margin-top:10px;
+   padding:0px;
+}
+.tab-year li, .tab-month li{
+   float: left;
+   list-style: none;
+   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f6f8f9+0,e5ebee+50,d7dee3+51,f5f7f9+100;White+Gloss */
+   background: #f6f8f9; /* Old browsers */
+   background: -moz-linear-gradient(top,  #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%); /* FF3.6-15 */
+   background: -webkit-linear-gradient(top,  #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* Chrome10-25,Safari5.1-6 */
+   background: linear-gradient(to bottom,  #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
+   font-size:16px;
+   padding:7px 10px;
+   margin-right:1px;
+   color:#000;
+   width:100px;
+   text-transform: Sentence-case;
+   text-align:center;
+   line-height:15px;
+}
 @media screen (min-width: 900px) and (max-width: 1200px) {
 	.tab-head li{
 		width:32%;
 	}
 }
-.tab-head li.active, .tab-head li:hover{
+.tab-head li.active, .tab-head li:hover, .tab-year li.active, .tab-year li:hover, .tab-month li.active, .tab-month li:hover{
    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#87e0fd+0,53cbf1+40,05abe0+100;Blue+3D+%23+16 */
    background: #87e0fd; /* Old browsers */
    background: -moz-linear-gradient(top,  #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6-15 */
@@ -218,6 +240,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=0 ); /* IE6-9 */
    color:#FFF !important;
    cursor: pointer;
+}
+.tab-year li.active a, .tab-year li:hover a, .tab-month li.active a, .tab-month li:hover a{
+color: #FFF;
 }
 .tab-content{
    margin-top:6px;
