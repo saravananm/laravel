@@ -11,7 +11,10 @@
         <div class="row">
             <div class="col-md-8 pb-1">
                 <div class="graybox img-hover" style="position:relative">
-                    <x-postcoverimage />
+                    <img src="{{url('public/storage/images/posts/'.$postcoverimage->image_name) }}" class="image-fit">    
+                    <div class="featured-image-wrapper pt-2">
+                        <h3 class="featured-image-title"><a href="">{{$postcoverimage->title}}</a></h3>
+                    </div>
                 </div>
             </div>
              <div class="col-md-4  pl-0 pr-0 pb-1" >

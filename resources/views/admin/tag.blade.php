@@ -20,7 +20,7 @@
     @if(session('message'))
      <div class="alert alert-success" role="alert"> {{session('message')}}</div>
     @endif
-    <form action="/tags" method="post">
+    <form action="{{url('/tags')}}" method="post">
       @csrf
       <div class="form-group">
         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">

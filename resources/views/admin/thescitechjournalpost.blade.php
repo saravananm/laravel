@@ -64,7 +64,7 @@
         </div>
         <div class="col-sm-8 float-right">
           @if(isset($edit_data))
-          <img src= "{{url('storage/images/thescitechjournalposts/'.$edit_data->image_name) }}" style="width:150px;height:70px" />
+          <img src= "{{url('public/storage/images/thescitechjournalposts/'.$edit_data->image_name) }}" style="width:150px;height:70px" />
           @endif
         </div>
       </div>

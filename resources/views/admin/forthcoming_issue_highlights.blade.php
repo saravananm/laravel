@@ -18,7 +18,7 @@
     @if(session('message'))
      <div class="alert alert-success" role="alert"> {{session('message')}}</div>
     @endif
-    <form action="/highlights" method="post" enctype="multipart/form-data" >
+    <form action="{{url('/highlights')}}" method="post" enctype="multipart/form-data" >
       @csrf
       <div class="form-group">
         <label for="highlights">Highlights:</label>
@@ -30,7 +30,7 @@
 </div>
 @push('head')
 <!-- Scripts -->
-<script src="{{ asset('js/ckeditor/ckeditor.js')}}"></script>
+<script src="{{ asset('public/js/ckeditor/ckeditor.js')}}"></script>
 @endpush
 <script>
       CKEDITOR.replace( 'highlights' );

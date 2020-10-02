@@ -57,7 +57,7 @@ class FrontEndController extends Controller
         $sidepaneltabdetails            = $this->postservice->getSidePanelTab();
         $advertisementdetails_bottom    = $this->advertisementservice->getAdvertisementsByPosition('sidepanel_bottom');
         $advertisementdetails_banner    = $this->advertisementservice->getAdvertisementsByPosition('banner');
-
+        $postcoverimage                 = $this->postservice->getPostCoverImage();
         $selectedcategories = [];
         if($req->input('selectedcategories') != '')
         $selectedcategories = explode(',',$req->input('selectedcategories'));
@@ -71,7 +71,7 @@ class FrontEndController extends Controller
         $categories      = $this->categoryservice->allCategories();
         
         $title          = 'Discoveries & Innovations';
-        return View('discoveries-innovations-applications-impacts-science-society',['data' => $post, 'coverimage' => $coverimage, 'title' => $title, 'categories' => $categories, 'selectedcategories' => $selectedcategories, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner]);
+        return View('discoveries-innovations-applications-impacts-science-society',['data' => $post, 'coverimage' => $coverimage, 'title' => $title, 'categories' => $categories, 'selectedcategories' => $selectedcategories, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner, 'postcoverimage' => $postcoverimage]);
     }
 
     public function applicationsandimpactspage(Request $req)

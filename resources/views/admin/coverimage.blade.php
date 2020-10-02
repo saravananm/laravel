@@ -38,7 +38,7 @@
         </div>
         <div class="col-sm-8 float-right">
           @if(isset($edit_data))
-          <img src= "{{url('storage/images/coverimage/'.$edit_data->image_name) }}" style="width:150px;height:70px" />
+          <img src= "{{url('public/storage/images/coverimage/'.$edit_data->image_name) }}" style="width:150px;height:70px" />
           @endif
         </div>
       </div>
@@ -101,7 +101,7 @@
             @endif
           </td>
           <td>
-            <img src= "{{url('storage/images/coverimage/'.$coverimage->image_name) }}" style="width:150px;height:70px" />
+            <img src= "{{url('public/storage/images/coverimage/'.$coverimage->image_name) }}" style="width:150px;height:70px" />
           </td>
           <td><a href="{{url('coverimages/' . $coverimage->id)}}">Edit</a></td>
         </tr>

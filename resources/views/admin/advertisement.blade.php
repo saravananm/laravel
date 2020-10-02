@@ -20,7 +20,7 @@
     @endif
 
 
-    <form action="/advertisements" method="post" enctype="multipart/form-data" >
+    <form action="{{url('/advertisements')}}" method="post" enctype="multipart/form-data" >
       @csrf
       <div class="form-group">
         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
@@ -46,7 +46,7 @@
         </div>
         <div class="col-sm-8 float-right">
           @if(isset($edit_data))
-          <img src= "{{url('storage/images/advertisements/'.$edit_data->image_name) }}" style="width:150px;height:70px" />
+          <img src= "{{url('public/storage/images/advertisements/'.$edit_data->image_name) }}" style="width:150px;height:70px" />
           @endif
         </div>
       </div>
@@ -171,7 +171,7 @@
             @endif
           </td>
           <td>
-            <img src= "{{url('storage/images/advertisements/'.$advertisements->image_name) }}" style="width:150px;height:70px" />
+            <img src= "{{url('public/storage/images/advertisements/'.$advertisements->image_name) }}" style="width:150px;height:70px" />
           </td>
           <td><a href="{{url('advertisements/' . $advertisements->id)}}">Edit</a></td>
         </tr>
