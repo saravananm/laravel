@@ -17,8 +17,9 @@ class CategoryController extends Controller
 
     public function view()
     {
-    	$categories = $this->categoryservice->categoriesList();
-    	return View('admin.category',['data'=> $categories]);
+		$categories = $this->categoryservice->categoriesList();
+		$divisions = $this->categoryservice->getDivisions();
+    	return View('admin.category',['data'=> $categories, 'divisions' => $divisions]);
     }
 
     public function add(Request $req)
@@ -47,7 +48,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
     	$edit_data = $this->categoryservice->getCategory($id);
-    	$categories = $this->categoryservice->categoriesList();
-    	return View('admin.category',['data'=> $categories, 'edit_data' => $edit_data]);
+		$categories = $this->categoryservice->categoriesList();
+		$divisions = $this->categoryservice->getDivisions();
+    	return View('admin.category',['data'=> $categories, 'edit_data' => $edit_data, 'divisions' => $divisions]);
     }
 }

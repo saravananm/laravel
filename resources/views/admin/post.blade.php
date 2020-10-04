@@ -22,27 +22,8 @@
 
     <form action="{{url('/posts')}}" method="post" enctype="multipart/form-data" >
       @csrf
-      <div class="form-group">
          <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
-            <label for="division">Select Division</label>
-            <select class="form-control" id="division" name="division">
-                @foreach($divisions as $slug => $division)
-                <option value="{{$slug}}"
-                @if(isset($edit_data))
-                  @if(old('division') !== null)
-                  {{ (old("division") == $slug ? "selected":"") }}
-                  @else
-                  {{ ($edit_data->division == $slug ? "selected":"") }}
-                  @endif
-                @else
-                  @if(old('division') !== null)
-                  {{ (old("division") == $slug ? "selected":"") }}
-                  @endif
-                @endif
-                >{{$division}}</option>
-                @endforeach
-            </select>
-      </div>
+            
       <div class="form-group">
             <label for="categories">Select Categories</label>
             <select multiple class="form-control" id="categories" name="categories[]">
@@ -66,7 +47,7 @@
                     @endif
                 @endif
 
-                >{{$category->category}}</option>
+                >{{strtoupper($category->division)}} / {{$category->category}} </option>
                 @endforeach
             </select>
       </div>

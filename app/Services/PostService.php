@@ -43,7 +43,6 @@ class PostService
 	public function saveValidation($req)
 	{
 		return Validator::make($req->all(), [
-			'division' 		=> 'required',
 			'categories' 	=> 'required',
             'title' 		=> 'required',
             'image_name' 	=> 'required|mimes:jpeg,png',
@@ -60,7 +59,6 @@ class PostService
 	public function updateValidation($req)
 	{
 		return Validator::make($req->all(), [
-			'division' 		=> 'required',
 			'categories' 	=> 'required',
             'title' 		=> 'required',
             'image_name' 	=> 'mimes:jpeg,png',
@@ -83,7 +81,6 @@ class PostService
 			$file_path = $req->image_name->hashName();
 			$post->image_name 	= $file_path;
 		}
-        $post->division 		= $req->division;
         $post->title 			= $req->title;
         $post->slug 			= $this->slugify($req->title);
         $post->short_message 	= $req->short_message;
@@ -111,7 +108,6 @@ class PostService
 			$file_path = $req->image_name->hashName();
 			$post->image_name 	= $file_path;
 		}
-        $post->division 		= $req->division;
         $post->title 			= $req->title;
         $post->slug 			= $this->slugify($req->title);
         $post->short_message 	= $req->short_message;
@@ -151,33 +147,33 @@ class PostService
 	public function getSidePanelTab()
 	{
 		$return_array = array();
-		$di = Post::select('division','id','title')->where('division','discoveries-innovations')->where('status',1)->orderBy('datefor', 'desc')->take(5)->get();
+		$di = Post::select('division','posts.id','title')->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->where('division','discoveries-innovations')->where('posts.status',1)->orderBy('datefor', 'desc')->take(5)->get();
 		array_push($return_array, $di->toArray());
 
-		$ai = Post::select('division','id','title')->where('division','applications-impacts')->where('status',1)->orderBy('datefor', 'desc')->take(5)->get();
+		$ai = Post::select('division','posts.id','title')->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->where('division','applications-impacts')->where('posts.status',1)->orderBy('datefor', 'desc')->take(5)->get();
 		array_push($return_array, $ai->toArray());
 
-		$ss = Post::select('division','id','title')->where('division','science-society')->where('status',1)->orderBy('datefor', 'desc')->take(5)->get();
+		$ss = Post::select('division','posts.id','title')->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->where('division','science-society')->where('posts.status',1)->orderBy('datefor', 'desc')->take(5)->get();
 		array_push($return_array, $ss->toArray());
 		return $return_array;
 	}
 
 	public function getTopNewsAndFeaturePosts()
 	{
-		return Post::with(['tags'])->where('division','news-features')->orderBy('datefor','desc')->take(5)->get();
+		return Post::with(['tags'])->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->where('categories.division','news-features')->orderBy('datefor','desc')->take(5)->get();
 	}
 
 	public function getPostsByFilters($division, $categories)
 	{
 		if(empty($categories))
-			return Post::with(['tags'])->where('division',$division)->orderBy('datefor','desc')->paginate(2);
+			return Post::with(['tags'])->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->where('division',$division)->orderBy('datefor','desc')->paginate(10);
 		else
-			return Post::join('post_categories', 'posts.id', '=', 'post_categories.post_id')->with(['tags'])->where('division',$division)->whereIn('categorie_id',$categories)->orderBy('datefor','desc')->paginate(2);
+			return Post::join('post_categories', 'posts.id', '=', 'post_categories.post_id')->with(['tags'])->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->where('division',$division)->whereIn('categorie_id',$categories)->orderBy('datefor','desc')->paginate(10);
 
 	}
 
 	public function getNewsAndFeaturePosts()
 	{
-		return Post::with(['tags'])->where('division','news-features')->orderBy('id','desc')->paginate(3);
+		return Post::with(['tags'])->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->where('division','news-features')->orderBy('posts.id','desc')->paginate(3);
 	}
 }

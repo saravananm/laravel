@@ -22,6 +22,27 @@
     <form action="{{url('/categories')}}" method="post">
       @csrf
       <div class="form-group">
+         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
+            <label for="division">Select Division</label>
+            <select class="form-control" id="division" name="division">
+                @foreach($divisions as $slug => $division)
+                <option value="{{$slug}}"
+                @if(isset($edit_data))
+                  @if(old('division') !== null)
+                  {{ (old("division") == $slug ? "selected":"") }}
+                  @else
+                  {{ ($edit_data->division == $slug ? "selected":"") }}
+                  @endif
+                @else
+                  @if(old('division') !== null)
+                  {{ (old("division") == $slug ? "selected":"") }}
+                  @endif
+                @endif
+                >{{$division}}</option>
+                @endforeach
+            </select>
+      </div>
+      <div class="form-group">
         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
         <label for="category">Category:</label>
         <input type="text" class="form-control"  name="category" placeholder="Enter category Name" value="@if(isset($edit_data)){{old('category', $edit_data->category)}}@else{{old('category')}}@endif" id="category">
@@ -70,6 +91,7 @@
       <thead>
         <tr>
           <th scope="col">#</th>
+          <th scope="col">Division</th>
           <th scope="col">Category</th>
           <th scope="col">Order</th>
           <th scope="col">Status</th>
@@ -80,6 +102,7 @@
         @foreach($data as $categories)
           <tr>
           <th scope="row">{{$categories->id}}</th>
+          <td>{{$categories->division}}</td>
           <td>{{$categories->category}}</td>
           <td>{{$categories->order}}</td>
           <td>

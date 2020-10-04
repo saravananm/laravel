@@ -25,10 +25,9 @@ class PostController extends Controller
     public function view()
     {
         $post           = $this->postservice->postsList();
-        $divisions      = $this->postservice->getDivisions();
         $categorieslist = $this->categoryservice->allCategories();
         $tags           = $this->tagservice->allTags();
-    	return View('admin.post',['data'=> $post, 'divisions'=> $divisions, 'categorieslist' => $categorieslist, 'tags' => $tags]);
+    	return View('admin.post',['data'=> $post, 'categorieslist' => $categorieslist, 'tags' => $tags]);
     }
 
     public function add(Request $req)

@@ -90,7 +90,7 @@ class ThescitechjournalpostService
 		$post 				= Thescitechjournalpost::find($req->id);
 		if($req->hasFile('image_name'))
 		{
-			$req->image_name->store('public/images/posts');
+			$req->image_name->store('public/images/thescitechjournalposts');
 			$file_path = $req->image_name->hashName();
 			$post->image_name 	= $file_path;
 		}

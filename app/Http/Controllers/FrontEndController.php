@@ -68,7 +68,7 @@ class FrontEndController extends Controller
         $coverimage     = $this->coverimageservice->getLatestCoverImage();
 
         $this->categoryservice      = new CategoryService();
-        $categories      = $this->categoryservice->allCategories();
+        $categories      = $this->categoryservice->getCategoriesByDivision('discoveries-innovations');
         
         $title          = 'Discoveries & Innovations';
         return View('discoveries-innovations-applications-impacts-science-society',['data' => $post, 'coverimage' => $coverimage, 'title' => $title, 'categories' => $categories, 'selectedcategories' => $selectedcategories, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner, 'postcoverimage' => $postcoverimage]);
@@ -80,6 +80,7 @@ class FrontEndController extends Controller
         $sidepaneltabdetails            = $this->postservice->getSidePanelTab();
         $advertisementdetails_bottom    = $this->advertisementservice->getAdvertisementsByPosition('sidepanel_bottom');
         $advertisementdetails_banner    = $this->advertisementservice->getAdvertisementsByPosition('banner');
+        $postcoverimage                 = $this->postservice->getPostCoverImage();
 
         $selectedcategories = [];
         if($req->input('selectedcategories') != '')
@@ -91,10 +92,10 @@ class FrontEndController extends Controller
         $coverimage     = $this->coverimageservice->getLatestCoverImage();
 
         $this->categoryservice      = new CategoryService();
-        $categories      = $this->categoryservice->allCategories();
+        $categories      = $this->categoryservice->getCategoriesByDivision('applications-impacts');
         
         $title          = 'Applications & Impacts';
-        return View('discoveries-innovations-applications-impacts-science-society',['data' => $post, 'coverimage' => $coverimage, 'title' => $title, 'categories' => $categories, 'selectedcategories' => $selectedcategories, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner]);
+        return View('discoveries-innovations-applications-impacts-science-society',['data' => $post, 'coverimage' => $coverimage, 'title' => $title, 'categories' => $categories, 'selectedcategories' => $selectedcategories, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner, 'postcoverimage' => $postcoverimage]);
     }
 
     public function scienceandsocietypage(Request $req)
@@ -103,7 +104,8 @@ class FrontEndController extends Controller
         $sidepaneltabdetails            = $this->postservice->getSidePanelTab();
         $advertisementdetails_bottom    = $this->advertisementservice->getAdvertisementsByPosition('sidepanel_bottom');
         $advertisementdetails_banner    = $this->advertisementservice->getAdvertisementsByPosition('banner');
-
+        $postcoverimage                 = $this->postservice->getPostCoverImage();
+        
         $selectedcategories = [];
         if($req->input('selectedcategories') != '')
         $selectedcategories = explode(',',$req->input('selectedcategories'));
@@ -114,10 +116,10 @@ class FrontEndController extends Controller
         $coverimage     = $this->coverimageservice->getLatestCoverImage();
 
         $this->categoryservice      = new CategoryService();
-        $categories      = $this->categoryservice->allCategories();
+        $categories      = $this->categoryservice->getCategoriesByDivision('science-society');
         
         $title          = 'Science & Society';
-        return View('discoveries-innovations-applications-impacts-science-society',['data' => $post, 'coverimage' => $coverimage, 'title' => $title, 'categories' => $categories, 'selectedcategories' => $selectedcategories, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner]);
+        return View('discoveries-innovations-applications-impacts-science-society',['data' => $post, 'coverimage' => $coverimage, 'title' => $title, 'categories' => $categories, 'selectedcategories' => $selectedcategories, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom, 'advertisementdetails_banner' => $advertisementdetails_banner, 'postcoverimage' => $postcoverimage]);
     }
 
     public function thescitechjournalpage($my = '')
