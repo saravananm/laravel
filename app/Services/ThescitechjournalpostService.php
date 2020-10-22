@@ -114,6 +114,14 @@ class ThescitechjournalpostService
 	public function getThescitechPosts($my)
 	{
 		$my_array = explode("-",$my);
-		return Thescitechjournalpost::join('coverimages', 'thescitechjournalposts.coverimages_id', '=', 'coverimages.id')->join('tags','thescitechjournalposts.tag_id','=','tags.id')->where('thescitechjournalposts.status','1')->where('coverimages.month',$my_array[0])->where('coverimages.year',$my_array[1])->orderBy('thescitechjournalposts.id','desc')->select('thescitechjournalposts.id','thescitechjournalposts.title','thescitechjournalposts.slug','tags.*')->get();
+		$thescitechposts =  Thescitechjournalpost::join('coverimages', 'thescitechjournalposts.coverimages_id', '=', 'coverimages.id')->join('tags','thescitechjournalposts.tag_id','=','tags.id')->where('thescitechjournalposts.status','1')->where('coverimages.month',$my_array[0])->where('coverimages.year',$my_array[1])->orderBy('thescitechjournalposts.id','desc')->select('thescitechjournalposts.id','thescitechjournalposts.image_name','tags.background','tags.color','tags.name','thescitechjournalposts.slug','thescitechjournalposts.title','thescitechjournalposts.datefor','thescitechjournalposts.author','thescitechjournalposts.short_message')->get();
+		$return_arr = array();
+		foreach($thescitechposts as $post)
+		{
+			if(!isset($return_arr[$post->name]))
+			$return_arr[$post->name] = array();
+			array_push($return_arr[$post->name], $post);
+		}
+		return $return_arr;
 	}
 }

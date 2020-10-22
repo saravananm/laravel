@@ -70,7 +70,7 @@
       </div>
       <div class="form-group">
         <label for="datefor">Date:</label>
-        <input type="date"  class="form-control" name="datefor" placeholder="Select Date" value="@if(isset($edit_data)){{old('datefor',$edit_data->datefor)}}@else{{old('datefor')}}@endif" id="datefor">
+        <input type="date" style="width:250px;"  class="form-control" name="datefor" placeholder="Select Date" value="@if(isset($edit_data)){{old('datefor',$edit_data->datefor)}}@else{{old('datefor')}}@endif" id="datefor">
       </div>
       <div class="form-group">
         <label for="author">Author:</label>

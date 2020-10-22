@@ -8,7 +8,6 @@
 <div class="row mt-2">
     <!---- Right Side ------->
      <div class="col-md-8 pr-0">
-        <div class="title-box mt-2"><span>{{$post->division}}</span></div>
         <div class="clearfix">&nbsp;</div>
         @foreach($post->tags as $tag)
         <span class="news-tag" style="background:#{{$tag->background}};color:#{{$tag->color}};">{{$tag->name}}</span>

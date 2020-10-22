@@ -20,8 +20,10 @@
         <li ><a  href="{{url('coverimages')}}">Cover Image Module</a></li>
         <li ><a  href="{{url('categories')}}">Categories Module</a></li>
         <li ><a  href="{{url('posts')}}">Post Module</a></li>
+		<li ><a  href="{{url('thescitechjournalcategories')}}">The ScitechJournal Categories Module</a></li>
         <li ><a  href="{{url('thescitechjournalposts')}}">The ScitechJournal Post Module</a></li>
         <li ><a  href="{{url('highlights')}}">Highlight Module</a></li>
+        <li ><a  href="{{url('configs')}}">Config Settings</a></li>
       </ul>
     </div>
     <div class="col-sm-10 float-left ml-0 mr-0 pr-0 pl-0">

@@ -1,41 +1,30 @@
 <?php
 namespace App\Services;
 
-use App\Category;
+use App\Thescitech_categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryService
+class ThescitechjournalCategoryService
 {
 	public function getCategory($id)
 	{
-		return Category::where('id',$id)->first();
-	}
-
-	public function getDivisions()
-	{
-		return ["discoveries-innovations"=>"Discoveries&Innovations", "applications-impacts"=>"Applications&Impacts", "science-society"=>"Science&Society"];
+		return Thescitech_categories::where('id',$id)->first();
 	}
 
 	public function allCategories()
 	{
-		return Category::select('id','division','category','order')->where('status',1)->orderBy('division', 'asc')->orderBy('order', 'asc')->get();
-	}
-
-	public function getCategoriesByDivision($division)
-	{
-		return Category::select('id','division','category','order')->where('division',$division)->where('status',1)->orderBy('division', 'asc')->orderBy('order', 'asc')->get();
+		return Thescitech_categories::select('id','category','order')->where('status',1)->orderBy('division', 'asc')->orderBy('order', 'asc')->get();
 	}
 
 	public function categoriesList()
 	{
-		return Category::paginate(10);
+		return Thescitech_categories::paginate(10);
 	}
 
 	public function saveValidation($req)
 	{
 		return Validator::make($req->all(), [
-			'division' 		=> 'required',
             'category' 		=> 'required',
     		'order' 		=> 'required',
     		'status' 		=> 'required',
@@ -45,7 +34,6 @@ class CategoryService
 	public function updateValidation($req)
 	{
 		return Validator::make($req->all(), [
-			'division' 		=> 'required',
             'category' 		=> 'required',
     		'order' 		=> 'required',
     		'status' 		=> 'required',
@@ -54,8 +42,7 @@ class CategoryService
 
 	public function saveCategories($req)
 	{
-		$category 				= new Category;
-		$category->division 	= $req->division;
+		$category 				= new Thescitech_categories;
         $category->category 	= $req->category;
         $category->order 		= $req->order;
         $category->status 		= $req->status;
@@ -64,8 +51,7 @@ class CategoryService
 
 	public function updateCategories($req)
 	{
-		$category 				= Category::find($req->id);
-		$category->division 	= $req->division;
+		$category 				= Thescitech_categories::find($req->id);
         $category->category 	= $req->category;
         $category->order 		= $req->order;
         $category->status 		= $req->status;

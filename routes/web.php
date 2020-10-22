@@ -50,6 +50,11 @@ Route::group(['middleware' =>['customAuth']], function(){
 	Route::get('categories','CategoryController@view');
 	Route::post('categories','CategoryController@add');
 	Route::get('categories/{id}','CategoryController@edit');
+	
+	// Thescitechjournal Category
+	Route::get('thescitechjournalcategories','ThescitechjournalCategoryController@view');
+	Route::post('thescitechjournalcategories','ThescitechjournalCategoryController@add');
+	Route::get('thescitechjournalcategories/{id}','ThescitechjournalCategoryController@edit');
 
 	// Posts
 	Route::get('posts','PostController@view');
@@ -64,4 +69,8 @@ Route::group(['middleware' =>['customAuth']], function(){
 	//Forthcoming issue Highlights
 	Route::get('highlights','HighlightController@view');
 	Route::post('highlights','HighlightController@add');
+
+	//Config
+	Route::get('configs','ConfigController@view');
+	Route::post('configs','ConfigController@add');
 });

@@ -125,27 +125,27 @@ class FrontEndController extends Controller
     public function thescitechjournalpage($my = '')
     {
         $advertisementdetails_banner    = $this->advertisementservice->getAdvertisementsByPosition('banner');
+        $advertisementdetails_top       = $this->advertisementservice->getAdvertisementsByPosition('sidepanel_top');
+        $sidepaneltabdetails            = $this->postservice->getSidePanelTab();
+        $advertisementdetails_bottom    = $this->advertisementservice->getAdvertisementsByPosition('sidepanel_bottom');
         $this->coverimageservice        = new CoverImageService();
         $this->highlightservice         = new HighlightService();
         $this->thescitechjournalpostservice    = new ThescitechjournalpostService();
-        $post                           = $this->postservice->getTopNewsAndFeaturePosts();
-
+        $coverImageYearMonths           = $this->coverimageservice->getCoverImageYearsMonths();
         if($my == '')
         {
-            $coverimage                 = $this->coverimageservice->getLatestCoverImage();
-            $cover_image_month_year     = $coverimage ->month.'-'.$coverimage->year;
-            $thescitechjournalpost      = $this->thescitechjournalpostservice->getThescitechPosts($cover_image_month_year);
+            $Latestcoverimage           = $this->coverimageservice->getLatestCoverImage();
+            $my                         = $Latestcoverimage->month.'-'.$Latestcoverimage->year;
         }
-        else
-        {
-            $coverimage                 = $this->coverimageservice->getCoverImageByFilter($my);
-            $thescitechjournalpost      = $this->thescitechjournalpostservice->getThescitechPosts($my);
-        }
+       
+        $coverimage                     = $this->coverimageservice->getCoverImageByFilter($my);
+        $thescitechjournalpost          = $this->thescitechjournalpostservice->getThescitechPosts($my);
+        $my_array                       = explode("-",$my);
+        $month                          = $my_array[0];
+        $year                           = $my_array[1];
+        $monthname                      = array ('01'=>'Jan','02'=>'Feb','03'=>'Mar','04'=>'Apr','05'=>'May','06'=>'Jun','07'=>'Jul','08'=>'Aug','09'=>'Sep','10'=>'Oct','11'=>'Nov','12'=>'Dec');
 
-        $highlight                      = $this->highlightservice->getHighlight();
-
-        $coverimagesecongandthired      = $this->coverimageservice->getSecondSndThiredCoverImage();
-        return View('thescitechjournal',['data'=> $post, 'coverimage'=>$coverimage, 'highlight'=>$highlight, 'coverimagesecongandthired'=>$coverimagesecongandthired, 'advertisementdetails_banner' => $advertisementdetails_banner, 'thescitechjournalpost' => $thescitechjournalpost]);
+        return View('thescitechjournal',['coverimage'=>$coverimage, 'advertisementdetails_banner' => $advertisementdetails_banner, 'data' => $thescitechjournalpost, 'advertisementdetails_top' => $advertisementdetails_top, 'sidepaneltabdetails' => $sidepaneltabdetails, 'advertisementdetails_bottom' => $advertisementdetails_bottom,'coverImageYearMonths' => $coverImageYearMonths, 'selmonth' => $month, 'selyear' => $year, 'monthname' => $monthname]);
     }
 
     public function postpage($slug)

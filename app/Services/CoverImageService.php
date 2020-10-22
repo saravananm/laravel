@@ -13,7 +13,7 @@ class CoverImageService
 	}
 	public function coverImagesList()
 	{
-		return Coverimage::paginate(10);
+		return Coverimage::orderBy('year','desc')->orderBy('month','desc')->paginate(10);
 	}
 
 	public function saveValidation($req)
@@ -69,11 +69,6 @@ class CoverImageService
 	public function getLatestCoverImage()
 	{
 		return Coverimage::orderBy('year','desc')->where('status','1')->orderBy('month','desc')->first();
-	}
-
-	public function getSecondSndThiredCoverImage()
-	{
-		return Coverimage::orderBy('year','desc')->where('status','1')->orderBy('month','desc')->skip(1)->limit(2)->get();
 	}
 
 	public function getCoverImageByFilter($my)

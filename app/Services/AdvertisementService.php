@@ -86,6 +86,6 @@ class AdvertisementService
 
 	public function getAdvertisementsByPosition($position)
 	{
-		return Advertisement::where('position',$position)->orderBy('order','asc')->get();
+		return Advertisement::where('position',$position)->where('status','1')->orderBy('order','asc')->get();
 	}
 }
