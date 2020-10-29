@@ -1,7 +1,7 @@
 
 @extends('admin.layout.adminlayout')
 
-@section('title', 'Post Settings')
+@section('title', 'Thescitechjournal Post Settings')
 
 @section('content')
 <div class="contentarea">
@@ -43,7 +43,33 @@
                 @endforeach
             </select>
       </div>
-      
+      <div class="form-group">
+            <label for="categories">Select Categories</label>
+            <select multiple class="form-control" id="categories" name="categories[]">
+                
+                @foreach($categorieslist as $category)
+                <option value="{{$category->id}}"
+               
+                @if(isset($edit_data))
+                  @if(old('categories') !== null)
+                  {{ (in_array($category->id, old("categories")) ? "selected":"") }}
+                  @else
+                    @foreach($edit_data->categories as $ecategories_id)
+                      @if($category->id == $ecategories_id->id)
+                     selected
+                      @endif
+                    @endforeach
+                  @endif
+                @else
+                    @if(old('categories') !== null)
+                    {{ (in_array($category->id, old("categories")) ? "selected":"") }}
+                    @endif
+                @endif
+
+                >{{$category->category}} </option>
+                @endforeach
+            </select>
+      </div>
       <div class="form-group">
         <input type="hidden"  name="id" value="@if(isset($edit_data)){{old('id', $edit_data->id)}}@else{{old('id')}}@endif">
         <label for="title">Post Title:</label>
@@ -69,6 +95,10 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="message">Image Content:</label>
+        <textarea   class="form-control" name="image_content" placeholder="Image Content"  id="image_content">@if(isset($edit_data)){{old('image_content',$edit_data->image_content)}}@else{{old('image_content')}}@endif</textarea>
+      </div>
+      <div class="form-group">
         <label for="datefor">Date:</label>
         <input type="date" style="width:250px;"  class="form-control" name="datefor" placeholder="Select Date" value="@if(isset($edit_data)){{old('datefor',$edit_data->datefor)}}@else{{old('datefor')}}@endif" id="datefor">
       </div>
@@ -80,16 +110,20 @@
       <br />
       @foreach($tags as $tag)
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="tag{{$tag->id}}" name="tag_id"
+            <input class="form-check-input" type="checkbox" id="tag{{$tag->id}}" name="tag[]"
             @if(isset($edit_data))
-                @if(old('tag_id') !== null)
-                {{ (old("tag_id") == $tag->id ? "checked":"") }}
+                @if(old('tag') !== null)
+                {{ (in_array($tag->id, old("tag")) ? "checked":"") }}
                 @else
-                  {{ ($edit_data->tag_id == $tag->id ? "checked":"") }}
+                  @foreach($edit_data->tags as $etag_id)
+                    @if($tag->id == $etag_id->id)
+                   checked
+                    @endif
+                  @endforeach
                 @endif
             @else
-                @if(old('tag_id') !== null)
-                {{ (old("tag_id") == $tag->id ? "checked":"") }}
+                @if(old('tag') !== null)
+                {{ (in_array($tag->id, old("tag")) ? "checked":"") }}
                 @endif
             @endif
              value="{{$tag->id}}">
@@ -173,5 +207,6 @@
 <script>
       CKEDITOR.replace( 'short_message' );
       CKEDITOR.replace( 'message' );
+      CKEDITOR.replace( 'image_content' );
 </script>
 @endsection

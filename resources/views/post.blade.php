@@ -18,7 +18,10 @@
         <div class="list-author"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$post->author}}</div>
         <div class="clearfix">&nbsp;</div>
 
-        <img src="{{url('public/storage/images/posts/'.$post->image_name) }}" style="width: 100%" class=" mt-1">                              
+        <img src="{{url('public/storage/images/posts/'.$post->image_name) }}" style="width: 100%" class=" mt-1">  
+        <div class="image-content">    
+        {!! $post->image_content !!}                  
+        </div>                            
         <div class="news-content mt-2">
             {!! $post->message !!}
         </div>

@@ -14,7 +14,7 @@ class CreateThescitechjournalpostsTagTable extends Migration
     public function up()
     {
         Schema::create('thescitechjournalposts_tag', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->foreignId('post_id');
             $table->foreignId('tag_id');
         });

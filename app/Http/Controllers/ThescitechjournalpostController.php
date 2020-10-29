@@ -8,6 +8,7 @@ use Storage;
 use App\Services\ThescitechjournalpostService;
 use App\Services\TagService;
 use App\Services\CoverImageService;
+use App\Services\ThescitechjournalCategoryService;
 
 class ThescitechjournalpostController extends Controller
 {
@@ -15,11 +16,12 @@ class ThescitechjournalpostController extends Controller
     protected $tagservice;
     protected $coverimageservice;
 
-	public function __construct(Thescitechjournalpostservice $thescitechjournalpostservice, TagService $tagservice, CoverImageService $coverimageservice)
+	public function __construct(Thescitechjournalpostservice $thescitechjournalpostservice, TagService $tagservice, CoverImageService $coverimageservice, ThescitechjournalCategoryService $categoryservice)
 	{
         $this->thescitechjournalpostservice = $thescitechjournalpostservice;
         $this->tagservice 					= $tagservice;
         $this->coverimageservice 			= $coverimageservice;
+        $this->categoryservice              = $categoryservice;
 	}
 
 	public function view()
@@ -27,7 +29,8 @@ class ThescitechjournalpostController extends Controller
         $post           = $this->thescitechjournalpostservice->postsList();
         $tags           = $this->tagservice->allTags();
         $coverimages    = $this->coverimageservice->allCoverImages();
-    	return View('admin.thescitechjournalpost',['data'=> $post, 'tags' => $tags, 'coverimages' => $coverimages]);
+        $categorieslist = $this->categoryservice->allCategories();
+    	return View('admin.thescitechjournalpost',['data'=> $post, 'tags' => $tags, 'coverimages' => $coverimages, 'categorieslist' => $categorieslist]);
     }
 
      public function add(Request $req)
@@ -61,6 +64,7 @@ class ThescitechjournalpostController extends Controller
        	$tags           = $this->tagservice->allTags();
         $coverimages    = $this->coverimageservice->allCoverImages();
         $edit_data      = $this->thescitechjournalpostservice->getposts($id);
-    	return View('admin.thescitechjournalpost',['data'=> $post, 'tags' => $tags, 'coverimages' => $coverimages, 'edit_data' => $edit_data]);
+        $categorieslist = $this->categoryservice->allCategories();
+    	return View('admin.thescitechjournalpost',['data'=> $post, 'tags' => $tags, 'coverimages' => $coverimages, 'edit_data' => $edit_data, 'categorieslist' => $categorieslist]);
     }
 }

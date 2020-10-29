@@ -14,8 +14,8 @@ class CreatePostTagTable extends Migration
     public function up()
     {
         Schema::create('post_tag', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('thescitechjournalposts_id');
+            $table->bigIncrements('id');
+            $table->foreignId('post_id');
             $table->foreignId('tag_id');
            // $table->timestamps();
         });

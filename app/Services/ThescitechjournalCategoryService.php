@@ -14,7 +14,7 @@ class ThescitechjournalCategoryService
 
 	public function allCategories()
 	{
-		return Thescitech_categories::select('id','category','order')->where('status',1)->orderBy('division', 'asc')->orderBy('order', 'asc')->get();
+		return Thescitech_categories::select('id','category','order')->where('status',1)->orderBy('order', 'asc')->get();
 	}
 
 	public function categoriesList()

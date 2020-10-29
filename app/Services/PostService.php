@@ -44,7 +44,6 @@ class PostService
 		return Validator::make($req->all(), [
 			'categories' 	=> 'required',
             'title' 		=> 'required',
-            'image_name' 	=> 'required|mimes:jpeg,png',
     		'short_message' => 'required',
     		'message' 		=> 'required',
     		'datefor' 		=> 'required',
@@ -60,7 +59,6 @@ class PostService
 		return Validator::make($req->all(), [
 			'categories' 	=> 'required',
             'title' 		=> 'required',
-            'image_name' 	=> 'mimes:jpeg,png',
     		'short_message' => 'required',
     		'message' 		=> 'required',
     		'datefor' 		=> 'required',
@@ -83,7 +81,8 @@ class PostService
         $post->title 			= $req->title;
         $post->slug 			= $this->slugify($req->title);
         $post->short_message 	= $req->short_message;
-        $post->message 			= $req->message;
+		$post->message 			= $req->message;
+		$post->image_content 	= ($req->image_content==''?' ':$req->image_content);
         $post->datefor 			= $req->datefor;
         $post->author 			= $req->author;
         $post->status 			= $req->status;
@@ -110,7 +109,8 @@ class PostService
         $post->title 			= $req->title;
         $post->slug 			= $this->slugify($req->title);
         $post->short_message 	= $req->short_message;
-        $post->message 			= $req->message;
+		$post->message 			= $req->message;
+		$post->image_content 	= ($req->image_content==''?' ':$req->image_content);
         $post->datefor 			= $req->datefor;
         $post->author 			= $req->author;
         $post->cover_image 		= $req->cover_image;
@@ -159,7 +159,8 @@ class PostService
 
 	public function getTopNewsAndFeaturePosts()
 	{
-		return Post::with(['tags'])->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->groupBy('posts.id')->orderBy('datefor','desc')->take(5)->get();
+		return Post::with(['tags'])->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->select('posts.*')->groupBy('posts.id')->orderBy('datefor','desc')->take(5)->get();
+		//return Post::with(['tags'])->join('post_categories', 'posts.id', '=', 'post_categories.post_id')->join('categories', 'post_categories.categorie_id', '=', 'categories.id')->groupBy('posts.id')->orderBy('datefor','desc')->take(5)->get()->toarray();
 	}
 
 	public function getPostsByFilters($division, $categories)

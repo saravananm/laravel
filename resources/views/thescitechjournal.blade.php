@@ -37,8 +37,10 @@
             @foreach($postval as $post)
             <div class="list-news">
                 <div class="col-md-4 float-left pr-0 img-hover">
-                    <img src="{{url('public/storage/images/thescitechjournalposts/'.$post->image_name) }}" class="image-fit" >  
-                    <span class="news-tag" style="background:#{{$post->background}};color:#{{$post->color}};margin-left:5px; position:relative;top:-30px;">{{$post->name}}</span>
+                    <img src="{{url('public/storage/images/thescitechjournalposts/'.$post->image_name) }}" class="image-fit" >
+                    @foreach($post->tags as $tag)
+                    <span class="news-tag" style="background:#{{$tag->background}};color:#{{$tag->color}};margin-left:5px; position:relative;top:-30px;">{{$tag->name}}</span>
+                    @endforeach
                 </div>
                 <div class="col-md-8 float-right pr-0">
                     <h4><a href="{{url('the-scitech-journal-post/'.$post->slug)}}">{{$post->title}}</a></h4>

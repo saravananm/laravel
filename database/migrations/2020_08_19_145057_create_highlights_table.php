@@ -14,7 +14,7 @@ class CreateHighlightsTable extends Migration
     public function up()
     {
         Schema::create('highlights', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->longText('highlights');
             $table->timestamps();
         });

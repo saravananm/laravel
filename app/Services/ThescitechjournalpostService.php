@@ -5,7 +5,9 @@ use App\Thescitechjournalpost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use File;
+use DB;
 use App\Services\TagService;
+use App\Services\ThescitechjournalCategoryService;
 
 class ThescitechjournalpostService
 {
@@ -23,7 +25,7 @@ class ThescitechjournalpostService
 
 	public function getPostBySlug($slug)
 	{
-		return Thescitechjournalpost::join('tags','thescitechjournalposts.tag_id','=','tags.id')->where('slug',$slug)->first();
+		return Thescitechjournalpost::with(['tags'])->where('slug',$slug)->first();
 	}
 
 	public function postsList()
@@ -37,14 +39,14 @@ class ThescitechjournalpostService
 	public function saveValidation($req)
 	{
 		return Validator::make($req->all(), [
+			'categories' 	=> 'required',
 			'coverimages_id'=> 'required',
             'title' 		=> 'required',
-            'image_name' 	=> 'required|mimes:jpeg,png',
     		'short_message' => 'required',
     		'message' 		=> 'required',
     		'datefor' 		=> 'required',
 			'author' 		=> 'required',
-			'tag_id' 		=> 'required',
+			'tag' 			=> 'required',
     		'status' 		=> 'required',
         ]);
 	}
@@ -52,14 +54,14 @@ class ThescitechjournalpostService
 	public function updateValidation($req)
 	{
 		return Validator::make($req->all(), [
+			'categories' 	=> 'required',
 			'coverimages_id'=> 'required',
             'title' 		=> 'required',
-            'image_name' 	=> 'mimes:jpeg,png',
     		'short_message' => 'required',
     		'message' 		=> 'required',
     		'datefor' 		=> 'required',
 			'author' 		=> 'required',
-			'tag_id' 		=> 'required',
+			'tag' 			=> 'required',
     		'status' 		=> 'required',
         ]);
 	}
@@ -77,12 +79,14 @@ class ThescitechjournalpostService
         $post->title 			= $req->title;
         $post->slug 			= $this->slugify($req->title);
         $post->short_message 	= $req->short_message;
-        $post->message 			= $req->message;
+		$post->message 			= $req->message;
+		$post->image_content 	= $req->image_content;
         $post->datefor 			= $req->datefor;
         $post->author 			= $req->author;
         $post->status 			= $req->status;
-        $post->tag_id 			= $req->tag_id;
 		$insertedId 			= $post->save();
+		$post->tags()->attach($req->tag);
+		$post->categories()->attach($req->categories);
 	}
 
 	public function updatePosts($req)
@@ -94,16 +98,20 @@ class ThescitechjournalpostService
 			$file_path = $req->image_name->hashName();
 			$post->image_name 	= $file_path;
 		}
-       $post->coverimages_id 	= $req->coverimages_id;
+        $post->coverimages_id 	= $req->coverimages_id;
         $post->title 			= $req->title;
         $post->slug 			= $this->slugify($req->title);
         $post->short_message 	= $req->short_message;
-        $post->message 			= $req->message;
+		$post->message 			= $req->message;
+		$post->image_content 	= $req->image_content;
         $post->datefor 			= $req->datefor;
         $post->author 			= $req->author;
-        $post->tag_id 			= $req->tag_id;
         $post->status 			= $req->status;
 		$post->save();
+		$post->tags()->detach();
+		$post->tags()->attach($req->tag);
+		$post->categories()->detach();
+		$post->categories()->attach($req->categories);
 	}
 
 	public function slugify($title)
@@ -113,14 +121,23 @@ class ThescitechjournalpostService
 
 	public function getThescitechPosts($my)
 	{
-		$my_array = explode("-",$my);
-		$thescitechposts =  Thescitechjournalpost::join('coverimages', 'thescitechjournalposts.coverimages_id', '=', 'coverimages.id')->join('tags','thescitechjournalposts.tag_id','=','tags.id')->where('thescitechjournalposts.status','1')->where('coverimages.month',$my_array[0])->where('coverimages.year',$my_array[1])->orderBy('thescitechjournalposts.id','desc')->select('thescitechjournalposts.id','thescitechjournalposts.image_name','tags.background','tags.color','tags.name','thescitechjournalposts.slug','thescitechjournalposts.title','thescitechjournalposts.datefor','thescitechjournalposts.author','thescitechjournalposts.short_message')->get();
+		$thescitechjournalcategoryservice = new ThescitechjournalCategoryService;
+		$thescitechjournalcategory = $thescitechjournalcategoryservice->allCategories();
+
 		$return_arr = array();
-		foreach($thescitechposts as $post)
+		$my_array = explode("-",$my);
+
+		foreach($thescitechjournalcategory as $categories)
 		{
-			if(!isset($return_arr[$post->name]))
-			$return_arr[$post->name] = array();
-			array_push($return_arr[$post->name], $post);
+			$thescitechposts =  Thescitechjournalpost::join('coverimages', 'thescitechjournalposts.coverimages_id', '=', 'coverimages.id')->join('thescitechpost_categories','thescitechpost_categories.thescitechpost_id','=','thescitechjournalposts.id')->where('thescitechpost_categories.thescitechcategorie_id',$categories->id)->where('thescitechjournalposts.status','1')->where('coverimages.month',$my_array[0])->where('coverimages.year',$my_array[1])->orderBy('thescitechjournalposts.id','desc')->select('thescitechjournalposts.id','thescitechjournalposts.image_name','thescitechjournalposts.slug','thescitechjournalposts.title','thescitechjournalposts.datefor','thescitechjournalposts.author','thescitechjournalposts.short_message')->get();
+			$post_arr = array();
+			foreach($thescitechposts as $post)
+			{
+				$post['tags'] =  DB::select('select * from thescitechpost_tag join tags on tags.id = thescitechpost_tag.tag_id  where thescitechpost_id = :id', ['id' => $post->id]);
+				array_push($post_arr, $post);
+			}
+			if(count($post_arr) != 0)
+			$return_arr[$categories->category] = $post_arr;
 		}
 		return $return_arr;
 	}

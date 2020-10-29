@@ -76,6 +76,10 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="message">Image Content:</label>
+        <textarea   class="form-control" name="image_content" placeholder="Image Content"  id="image_content">@if(isset($edit_data)){{old('image_content',$edit_data->image_content)}}@else{{old('image_content')}}@endif</textarea>
+      </div>
+      <div class="form-group">
         <label for="datefor">Date:</label>
         <input type="date" style="width:250px;" class="form-control" name="datefor" placeholder="Select Date" value="@if(isset($edit_data)){{old('datefor',$edit_data->datefor)}}@else{{old('datefor')}}@endif" id="datefor">
       </div>
@@ -183,7 +187,6 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Division</th>
           <th scope="col">Title</th>
           <th scope="col">Status</th>
           <th scope="col">Edit</th>
@@ -193,7 +196,6 @@
         @foreach($data as $post)
           <tr>
           <th scope="row">{{$post->id}}</th>
-          <td>{{$post->division}}</td>
           <td>{{$post->title}}</td>
           <td>
             @if($post->status == '1') 
@@ -218,5 +220,6 @@
 <script>
       CKEDITOR.replace( 'short_message' );
       CKEDITOR.replace( 'message' );
+      CKEDITOR.replace( 'image_content' );
 </script>
 @endsection

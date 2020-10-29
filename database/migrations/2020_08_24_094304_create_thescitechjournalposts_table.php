@@ -14,7 +14,7 @@ class CreateThescitechjournalpostsTable extends Migration
     public function up()
     {
         Schema::create('thescitechjournalposts', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->foreignId('coverimages_id');
             $table->foreignId('tag_id');
             $table->string('title');
@@ -22,6 +22,7 @@ class CreateThescitechjournalpostsTable extends Migration
             $table->mediumText('short_message');
             $table->longText('message');
             $table->string('image_name');
+            $table->mediumText('image_content');
             $table->date('datefor');
             $table->string('author');
             $table->enum('status', ['1', '0']);

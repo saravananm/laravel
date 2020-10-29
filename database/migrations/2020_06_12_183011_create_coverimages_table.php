@@ -14,7 +14,7 @@ class CreateCoverimagesTable extends Migration
     public function up()
     {
         Schema::create('coverimages', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('image_name');
             $table->string('month');
             $table->string('year');

@@ -14,13 +14,14 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('division');
             $table->string('title');
             $table->string('slug');
             $table->mediumText('short_message');
             $table->longText('message');
             $table->string('image_name');
+            $table->mediumText('image_content');
             $table->date('datefor');
             $table->string('author');
             $table->enum('cover_image', ['1', '0']);

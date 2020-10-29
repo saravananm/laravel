@@ -14,7 +14,7 @@ class CreateThescitechCategoriesTable extends Migration
     public function up()
     {
         Schema::create('thescitech_categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('category');
             $table->integer('order');
             $table->enum('status', ['1', '0']);

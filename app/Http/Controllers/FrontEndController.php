@@ -29,7 +29,8 @@ class FrontEndController extends Controller
     public function homepage()
     {
     	$this->coverimageservice = new CoverImageService();
-    	$post                           = $this->postservice->getTopNewsAndFeaturePosts();
+        $post                           = $this->postservice->getTopNewsAndFeaturePosts();
+       // echo '<pre>'; print_r($post); die;
         $postcoverimage                 = $this->postservice->getPostCoverImage();
     	$coverimage                     = $this->coverimageservice->getLatestCoverImage();
 
